@@ -1,25 +1,19 @@
 clc; clear all;	
 
-    %% Constants that we will need
+    % Constants that we will need
 	% Speed of light
 	c = 299792458;
 	% Earth's rotation rate
 	omega_e = 7.2921151467e-5; %(rad/sec)
 
-	%% load out data
-    % this section loads up eph_formatted (data on satellite elliptical orbit)
-    % and observables which has data on the signal which also includes
-    % pseudoranges.
-    
+	% load out data
 	load('eph_formatted_.mat')
     eph_formatted_(1) = [];
     load('observables.mat');
     [~, order] = sort(PRN(:,end));
-    %%
     Pseudorange_m = Pseudorange_m(order,:);
     Pseudorange_m = Pseudorange_m(2:end, :);
     Pseudorange_m = Pseudorange_m - min(Pseudorange_m);
-    
      
     rcvr_tow = RX_time(1,end);%466728.880214+57.6;
 	% Arrays to store various outputs of the position estimation algorithm
@@ -28,7 +22,7 @@ clc; clear all;
 	VDOP_arr = [];
 	user_clock_bias_arr = [];
 
-	%% initial position of the user
+	% initial position of the user
 	xu = [0 0 0];
 	% initial clock bias
 	b =  0;

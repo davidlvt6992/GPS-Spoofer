@@ -1,6 +1,5 @@
 clc; clear all;
 
-
 % Constants that we will need
 % Speed of light
 c = 299792458;
@@ -19,9 +18,7 @@ Pseudorange_m(:,end) = madrid_pr;
 Pseudorange_m = Pseudorange_m - min(Pseudorange_m);
 
 
-
-
-rcvr_tow = RX_time(1,end);%466728.880214+57.6;
+rcvr_tow = RX_time(1,end);%466728.880214+57.6; isn't the receiver tow for each SV signal different?
 % Arrays to store various outputs of the position estimation algorithm
 user_position_arr = [];
 HDOP_arr = [];
@@ -31,8 +28,8 @@ user_clock_bias_arr = [];
 % initial position of the user
 xu = [0 0 0];
 % initial clock bias
-b =  0;
-cb = 0;
+b =  0; %clock bias times speed of light
+cb = 0;%user clock bias
 
 tau = 0;
 
@@ -61,7 +58,7 @@ if (numSV > 4)
             % To be correct, the satellite clock bias should be calculated
             % at rcvr_tow - tau, however it doesn't make much difference to
             % do it at rcvr_tow
-            dsv = estimate_satellite_clock_bias(rcvr_tow, eph_formatted_{i});
+            dsv = estimate_satellite_clock_bias(rcvr_tow, eph_formatted_{i});%does this function calculates the ionosphere bias?
             dsv_vec = [dsv_vec dsv]; %add calculated bias to array
             % measured pseudoranges corrected for satellite clock bias.
             % Also apply ionospheric and tropospheric corrections if
