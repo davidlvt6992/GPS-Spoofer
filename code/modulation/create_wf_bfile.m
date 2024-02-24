@@ -20,6 +20,8 @@ function create_wf_bfile(sv, fs, frames_arr)
     else
         wf = get_waveform(g, fr_bitstream_matrix);
         fwrite (fid, wf);
+        message = sprintf('Waveform binary file was created in:\n%s',pwd);
+        disp(message)
         fclose(fid);
     end
 end

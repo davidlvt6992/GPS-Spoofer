@@ -25,9 +25,7 @@ function wf_bitstream = get_waveform(g, fr_bitstream_matrix)
             wf_matrix = [wf_matrix  xor_res];
         end
     end
-    size(wf_matrix)
     
     %% collapsing wf to a single bit stream
     wf_bitstream = transpose(wf_matrix(:));
-    size(wf_bitstream)
 end
