@@ -20,3 +20,6 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+#GNSS-output files
+*.24P
+gps_ephemeris.xml
