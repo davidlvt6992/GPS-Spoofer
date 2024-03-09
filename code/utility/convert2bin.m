@@ -9,6 +9,6 @@ function bin = convert2bin(dec,LSB_weight,N)
     sgn = sign(dec_weight);
     bin_string = dec2bin(dec_weight,N);
     bin_string = bin_string(end-N+1:end);
-    bin = bin_string-'0';
+    bin = bin_string;
 end
 

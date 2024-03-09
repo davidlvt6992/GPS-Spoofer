@@ -23,7 +23,7 @@ classdef frame < handle
             obj.create_sf5(eph,others_struct);
             obj.bit_stream = cat(2,obj.sf1.bit_stream, ...
                 obj.sf2.bit_stream, obj.sf3.bit_stream, ...
-                obj.sf4.bit_stream, obj.sf4.bit_stream);
+                obj.sf4.bit_stream, obj.sf5.bit_stream);
         end
     end
 
