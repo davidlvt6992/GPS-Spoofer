@@ -16,6 +16,17 @@ classdef frame < handle
             % eph = ephemeris data struct.
             % others_struct = struct that contains other information needed 
             % to construct the frames.
+
+            %convert eph parameters that are suuposed to be transmitted in
+            %semi circles from rad to semi-circles.
+            eph.dn = eph.dn/pi;
+            eph.m0 = eph.m0/pi;
+            eph.omg0 = eph.omg0/pi;
+            eph.i0 = eph.i0/pi;
+            eph.w = eph.w/pi;
+            eph.odot = eph.odot/pi;
+            eph.idot = eph.idot/pi;
+
             obj.create_sf1(eph,others_struct);
             obj.create_sf2(eph,others_struct);
             obj.create_sf3(eph,others_struct);
@@ -47,7 +58,7 @@ classdef frame < handle
             obj.sf2 = subframe2();
             obj.sf2.create_word1(others_struct.TLM_msg);
             obj.sf2.create_word2(others_struct.TOW+6,others_struct.alert_flag,others_struct.AS_flag);
-            obj.sf2.create_word3(eph.iod,eph.crc);
+            obj.sf2.create_word3(eph.iod,eph.crs);
             obj.sf2.create_words_4_5(eph.dn,eph.m0);
             obj.sf2.create_words_6_7(eph.cuc, eph.e);
             obj.sf2.create_words_8_9(eph.cus, eph.sqrtA);
