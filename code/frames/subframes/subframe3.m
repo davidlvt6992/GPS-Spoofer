@@ -55,6 +55,9 @@ classdef subframe3 < handle
             obj.words_raw(3,:) = cat(2, C_ic_bin, omg0_bin_8_MSB); % 24 raw data bits of word 3
             obj.words_encoded(3,:) = hamming_parity(obj.words_raw(3,:), obj.words_encoded(2,29), obj.words_encoded(2,30)); % 30 encoded bits of word 3
 
+            obj.words_raw(4,:) = omg0_bin_24_LSB;% 24 raw data bits of word 4
+            obj.words_encoded(4,:) = hamming_parity(obj.words_raw(4,:),obj.words_encoded(3,29),obj.words_encoded(3,30));% 30 encoded bits of word 4
+
         end
 
         function create_words_5_6(obj, C_is, i_0)
