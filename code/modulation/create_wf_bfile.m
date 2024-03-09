@@ -14,7 +14,7 @@ function create_wf_bfile(sv, fs, frames_arr)
         fr_bitstream = [fr_bitstream frames_arr(i).bit_stream];
     end
     
-    [fid, message] = fopen("./shared_folder/attempt1/waveform.bin","w"); %insert path to write
+    [fid, message] = fopen("GNSS_files\GNSS_waveforms\waveform.bin","w"); %insert path to write
     
     if fid < 0 
         disp(message) 
