@@ -103,10 +103,10 @@ classdef subframe3 < handle
             %i_dot = Rate of Inclination Angle, in units of
             %semi_circles/sec.
 
-            OMEGA_dot_bin = convert2bin(OMEGA_dot,2^-43,24)-'0';%24 bits, LSB's weight is 2^-43
+            OMEGA_dot_bin = convert2bin(OMEGA_dot,2^-43,24) - '0';%24 bits, LSB's weight is 2^-43
             IODC_bin = convert2bin(IODC,1,10) - '0'; %10 bits of IODC.
             IODE_bin = IODC_bin(3:end); % 8 LSBs of the IODC is the IODE.
-            i_dot_bin = convert2bin(i_dot,2^-43,14); %14 bits, LSB's weight is 2^-43
+            i_dot_bin = convert2bin(i_dot,2^-43,14) - '0'; %14 bits, LSB's weight is 2^-43
             obj.words_raw(9,:) = OMEGA_dot_bin;%24 raw data bits of word 9
             obj.words_encoded(9,:) = hamming_parity( obj.words_raw(9,:),obj.words_encoded(8,29),obj.words_encoded(8,30));%30 encoded bits of word 9
 
