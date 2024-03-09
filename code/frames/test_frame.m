@@ -1,4 +1,4 @@
-clear; clc;
+% clear; clc;
 load('eph_formatted_.mat');
 
 %data fo encode into the frame
@@ -20,3 +20,9 @@ others_struct.fit_flag = 0;
 others_struct.AODO = [0 0 0 0 0]; %age of data offset
 
 fr = frame(eph,others_struct);
+
+id1 = fr.sf1.words_raw(2,20:22)
+id2 = fr.sf2.words_raw(2,20:22)
+id3 = fr.sf3.words_raw(2,20:22)
+id4 = fr.sf4.words_raw(2,20:22)
+id5 = fr.sf5.words_raw(2,20:22)
