@@ -22,7 +22,7 @@ function pr_vec = get_pseudo_ranges_itr(t, eph, x)
         broadcast_time = t;
         prev_distance = 0;
         distance_changes = inf;
-        while distance_changes > 0.1 
+        while distance_changes < 0.1 
         %% Get estimated broadcasting time 
             [xs_i, ys_i, zs_i] = get_satellite_position(eph{i}, broadcast_time , 1);
             xs_vec = [xs_i, ys_i, zs_i];
