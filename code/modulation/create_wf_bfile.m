@@ -40,7 +40,7 @@ function create_wf_bfile(sv, fs, frames_arr)
 
 
         wf = upsample(wf,2); %upsample to accommodate Q channel signal (which is 0)
-        wf = (wf-1/2).*(2^15); %convert wf to analog values
+        wf = (wf-1/2).*(2^13); %convert wf to analog values
 %         figure()
 %         plot(wf(1:1000))
         fwrite (fid, wf,"int16");

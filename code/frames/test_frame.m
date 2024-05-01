@@ -1,8 +1,8 @@
-% clear; clc;
+clear; clc;
 load('eph_formatted_.mat');
 
 %data fo encode into the frame
-eph = eph_formatted_{3}; %ephemeris data
+% eph = eph_formatted_{3}; %ephemeris data
 
 %create structure for additional parameters
 others_struct = struct;
@@ -18,11 +18,9 @@ others_struct.p_code_flag = 1;
 others_struct.T_GD = 2^-31+2^-27; %group delay time
 others_struct.fit_flag = 0;
 others_struct.AODO = [0 0 0 0 0]; %age of data offset
+% 
+% fr5 = frame(eph_formatted_{2},others_struct); %sv 5
+% fr16 = frame(eph_formatted_{3},others_struct); %sv 16
+% fr21 = frame(eph_formatted_{4},others_struct); %sv 21
+% fr25 = frame(eph_formatted_{5},others_struct); %sv 25
 
-fr = frame(eph,others_struct);
-
-id1 = fr.sf1.words_raw(2,20:22)
-id2 = fr.sf2.words_raw(2,20:22)
-id3 = fr.sf3.words_raw(2,20:22)
-id4 = fr.sf4.words_raw(2,20:22)
-id5 = fr.sf5.words_raw(2,20:22)
