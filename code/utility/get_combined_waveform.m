@@ -29,5 +29,6 @@ function combined_waveform = get_combined_waveform(waveform_matrix, pseudo_range
     end
     
     % the combined_waveform would be the summation of all rows in new_waveform_matrix
-    combined_waveform = sum(new_waveform_matrix, 1);
+    combined_waveform = sum(new_waveform_matrix, 1)/waveform_num; % division by number of waveform to prevent
+                                                                  % overflow of data type after addition.
 
