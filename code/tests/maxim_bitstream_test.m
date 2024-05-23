@@ -24,10 +24,15 @@ clear dig_wf1 dig_wf21% dig_wf25 dig_wf29 dig_wf30 dig_wf31
 
 % %get pseudo ranges
 % pr = get_pseudo_ranges_itr(rcvr_tow,eph_mat,madrid_ecef);
-% f_samp = 50*20*1023*4; %Hz
-% combined_dig_wf = get_combined_waveform(dig_wf_mat,pr,f_samp);
+f_samp = 50*20*1023*4; %Hz
+pr=[0 0];
+combined_dig_wf = get_combined_waveform(dig_wf_mat,pr,f_samp);
+white_noise = wgn(1,size(combined_dig_wf,2),40,'complex');
 
-combined_dig_wf =  sum(dig_wf_mat,1);
+combined_dig_wf = combined_dig_wf + white_noise;
+clear white_noise;
+
+% combined_dig_wf =  sum(dig_wf_mat,1);
 
 % analog_wf = upsample(combined_dig_wf,2);
 % clear combined_dig_wf;
@@ -42,7 +47,7 @@ clear wf_real wf_imag;
 interleaved_wf = stacked(:)';
 clear stacked
 
-[fid, message] = fopen("GNSS_files\GNSS_waveforms\waveform_single_maxim.bin","w"); %insert path to write
+[fid, message] = fopen("GNSS_files\GNSS_waveforms\waveform_2sv_maxim_noised.bin","w"); %insert path to write
     
 if fid < 0
     disp(message)
