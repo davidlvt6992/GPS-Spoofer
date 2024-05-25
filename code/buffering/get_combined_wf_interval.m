@@ -1,4 +1,4 @@
-function combined_interval_RX= get_combined_wf_interval(t1,t2,sv_num,PR,sv_bitstream,f_samp,f_dop)
+function combined_interval_RX= get_combined_wf_interval(t1,interval_size,sv_num,PR,sv_bitstream,f_samp,f_dop)
 %GET_BUFFER_WF_SINGLE_SV returns the combined modulated waveforms interval
 %of svs #(sv_num) that should be received at the RX at the time interval [t1,t2],
 %t1 and t2 are RX times. this means that the actual transimtion time of the
@@ -17,10 +17,10 @@ c = physconst('LightSpeed'); %speed of light in [m/s]
 n = size(sv_num,1);
 tau = PR/c; %pseudo-range in [sec] nX1
 t1_TX = t1-tau; %transmission time of interval start nX1
-t2_TX = t2-tau; %transmission time of interval end nX1
-combined_interval = get_waveform_interval(t1_TX(1),t2_TX(1),sv_num(1),sv_bitstream(1,:),f_samp, f_dop(1));
+% t2_TX = t2-tau; %transmission time of interval end nX1
+combined_interval = get_waveform_interval(t1_TX(1),interval_size,sv_num(1),sv_bitstream(1,:),f_samp, f_dop(1));
 for i=2:n
-    combined_interval = combined_interval + get_waveform_interval(t1_TX(i),t2_TX(i),sv_num(i),sv_bitstream(i,:),f_samp, f_dop(i));
+    combined_interval = combined_interval + get_waveform_interval(t1_TX(i),interval_size,sv_num(i),sv_bitstream(i,:),f_samp, f_dop(i));
 end
 combined_interval_RX = combined_interval;
 end
