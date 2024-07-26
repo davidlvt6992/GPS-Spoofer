@@ -2,23 +2,23 @@ clear;
 clc;
 load("data\bitstreams_26_05.mat")
 
-bs_mat = zeros(2,4092);
-for i=1:2
+bs_mat = zeros(3,100);
+for i=1:3
     a = cell2mat(bitstream(i));
 %     bs_mat(i,:)=[cell2mat(bitstream(i)) zeros(1,4091-size(a,2))];
-    bs_mat(i,:) = a(1:4092);
+    bs_mat(i,:) = a(1:100);
 end
 
 dig_wf1 = get_waveform(cacode(1,4),bs_mat(1,:),2e3,0);
 dig_wf11 = get_waveform(cacode(11,4),bs_mat(2,:),4e3,0);
-% dig_wf25 = get_waveform(cacode(25,4),bs_mat(3,:));
+dig_wf25 = get_waveform(cacode(25,4),bs_mat(3,:),-5e3,0);
 % dig_wf29 = get_waveform(cacode(29,4),bs_mat(4,:));
 % dig_wf30 = get_waveform(cacode(30,4),bs_mat(5,:));
 % dig_wf31 = get_waveform(cacode(31,4),bs_mat(6,:));
 
 % 
-dig_wf_mat = [dig_wf1 ; dig_wf11];% ; dig_wf25 ; dig_wf29; dig_wf30;dig_wf31];
-clear dig_wf1 dig_wf11% dig_wf25 dig_wf29 dig_wf30 dig_wf31
+dig_wf_mat = [dig_wf1 ; dig_wf11; dig_wf25 ];% dig_wf29; dig_wf30;dig_wf31];
+clear dig_wf1 dig_wf11 dig_wf25 %dig_wf29 dig_wf30 dig_wf31
 
 % 
 % madrid_lla = [40.41524063127617, -3.6825268152573467 0];
@@ -27,9 +27,9 @@ clear dig_wf1 dig_wf11% dig_wf25 dig_wf29 dig_wf30 dig_wf31
 % %get pseudo ranges
 % pr = get_pseudo_ranges_itr(rcvr_tow,eph_mat,madrid_ecef);
 f_samp = 50*20*1023*4; %Hz
-pr=[0 0];
+pr=[0 0 0];
 combined_dig_wf = get_combined_waveform(dig_wf_mat,pr,f_samp);
-white_noise = wgn(1,size(combined_dig_wf,2),60,'complex');
+white_noise = wgn(1,size(combined_dig_wf,2),40,'complex');
 
 combined_dig_wf = combined_dig_wf + white_noise;
 clear white_noise;

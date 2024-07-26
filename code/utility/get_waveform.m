@@ -29,6 +29,7 @@ function waveform = get_waveform(g, bitstream, f_dop,t0)
         else
 %             wf = [wf g_anti];
             wf(start_ind:end_ind) = g_anti;
+        end
     end
     
     %% convert to analog waveform
