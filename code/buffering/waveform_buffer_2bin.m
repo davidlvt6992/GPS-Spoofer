@@ -49,7 +49,7 @@ while (t_j<T)
     PR = get_pseudo_ranges_itr(t_i+RX_TOW,eph_mat,ECEF_pos); %calculate PR for current interval
     buffer = get_combined_wf_interval(t_i,buffer_size,sv_num,PR,sv_bitstreams,...
         f_samp,f_dop); %fill buffer with current interval
-    buffer = awgn(buffer,-40); %add white noise to signal
+    buffer = awgn(buffer,-80); %add white noise to signal
 %     waveform_aux(i:j) = buffer; %fill auxilary array with buffer at relevant interval
     buffer_real = real(buffer);
     buffer_imag = imag(buffer);

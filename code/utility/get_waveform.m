@@ -15,7 +15,7 @@ function waveform = get_waveform(g, bitstream, f_dop,t0)
     
     %% init empty waveform bitstream
     wf = zeros(1, length(g_)*length(bitstream));
-%     wf = [];
+    bs_columns = zeros(length()) 
     
     %% for each frame, we will run on all message bits and for each bit we  
     % will preform xor(g_, current_bit) and concat to wf
@@ -39,5 +39,5 @@ function waveform = get_waveform(g, bitstream, f_dop,t0)
     time_vec = 0:1/fs:(size(analog_wf,2)-1)/fs;
     time_vec = time_vec+t0; %offset to t0 time
     exp_dop = exp(1j*2*pi*f_dop*time_vec); %doppler exponential to multiply waveform
-    waveform = analog_wf.*exp_dop; %return analog wavform with doppler frequenct offset
+    waveform = analog_wf.*exp_dop; %return analog wavform with doppler frequency offset
 end
