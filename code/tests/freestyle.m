@@ -8,9 +8,9 @@ for i=1:5
 end
 bitstream_mat(2,:) = [bitstream_mat(2,2:end) 0];
 bitstream_mat(3,:) = [bitstream_mat(3,2:end) 0];
-num_bits = 4000;
+num_bits = 5000;
 
-sv_ind = [1 2 3 4];
+sv_ind = [1];
 num_sv = size(sv_ind,2);
 ca_rep_len = 1023*4*20;
 
@@ -51,15 +51,15 @@ end
 wf_combined = sum(wf_mat,1);
 clear wf_mat;
 
-white_noise = wgn(1,size(wf_combined,2),92,'complex');
-white_noise = wf_combined + white_noise;
+% white_noise = wgn(1,size(wf_combined,2),92,'complex');
+% wf_combined = wf_combined + white_noise;
 
-wf_real = real(white_noise);
-wf_imag = imag(white_noise);
+wf_real = real(wf_combined);
+wf_imag = imag(wf_combined);
 wf_stacked = [wf_real;wf_imag];
 wf_final = wf_stacked(:)';
-
-[fid, message] = fopen("GNSS_files\GNSS_waveforms\waveform_freestyle_4sv_wPR.bin","w"); %insert path to write
+file_path =  sprintf("data\\waveform_creation\\sv%d_verification.bin",svx_vec(sv_ind(1))); 
+[fid, message] = fopen(file_path,"w"); %insert path to write
 fwrite (fid, wf_final,"int16");
 fclose(fid);
 
@@ -93,3 +93,15 @@ for i=1:num_sv
     cnt=cnt+1;
 
 end
+%%
+[fid,msg] = fopen(file_path,'r');
+
+sample_size = 4; %size of a single sample in byte (single sample in interleaved format which means real + imaginary)
+bit_size = ca_rep_len*4 %single bit of the original bitstream size in bytes
+
+wf_interleaved = fread(file_path,ca_rep_len,'int16',bit_size)
+wf_real = wf_interleaved(1:2:end);
+wf_imag = wf_interleaved(2:2:end);
+
+
+fclose(fid);
