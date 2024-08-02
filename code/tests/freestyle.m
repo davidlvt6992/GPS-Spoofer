@@ -8,7 +8,7 @@ for i=1:5
 end
 bitstream_mat(2,:) = [bitstream_mat(2,2:end) 0];
 bitstream_mat(3,:) = [bitstream_mat(3,2:end) 0];
-num_bits = 5000;
+num_bits = 100;
 
 sv_ind = [1];
 num_sv = size(sv_ind,2);
@@ -41,12 +41,13 @@ for i=1:num_sv
              temp(:,j) = 1-ca_rep;
          end
      end
-     wf_mat(i,:)=(temp(:)'-1/2).*(2^14).*exp(1j*2*pi*f_dop(sv_ind(i)).*time_vec); %destack, convert to analog and add doppler
-     wf_mat(i,:) = [zeros(1,shift_arr(i)) wf_mat(i,1:end-shift_arr(i))];
+%      wf_mat(i,:)=(temp(:)'-1/2).*(2^14).*exp(1j*2*pi*f_dop(sv_ind(i)).*time_vec); %destack, convert to analog and add doppler
+     wf_mat(i,:) = temp(:)';
+%      wf_mat(i,:) = [zeros(1,shift_arr(i)) wf_mat(i,1:end-shift_arr(i))];
 end
 
 
-% wf_combined = get_combined_waveform(wf_mat,pr_,f_samp);
+wf_combined = get_combined_waveform(wf_mat,pr_,f_samp);
 
 wf_combined = sum(wf_mat,1);
 clear wf_mat;
@@ -95,13 +96,13 @@ for i=1:num_sv
 end
 %%
 [fid,msg] = fopen(file_path,'r');
-
+disp(msg)
 sample_size = 4; %size of a single sample in byte (single sample in interleaved format which means real + imaginary)
-bit_size = ca_rep_len*4 %single bit of the original bitstream size in bytes
+bit_size = ca_rep_len*4; %single bit of the original bitstream size in bytes
 
-wf_interleaved = fread(file_path,ca_rep_len,'int16',bit_size)
+wf_interleaved = fread(fid,'int16');
 wf_real = wf_interleaved(1:2:end);
 wf_imag = wf_interleaved(2:2:end);
-
+wf = wf_real+1j*wf_imag;
 
 fclose(fid);
