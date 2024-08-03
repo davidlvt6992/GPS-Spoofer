@@ -18,8 +18,8 @@ function bitstream2waveformf(bitstream, sv_num, f_dop)
     %% Creating time vector
     bitstream_len = length(bitstream);
     cacode_len = length(ca_code);
-    ca_rep_len = cacode_len*samples_per_chip*20;
-    f_samp = 50*20*cacode_len*samples_per_chip;
+    ca_rep_len = cacode_len*20;
+    f_samp = 50*20*cacode_len;
     t_samp = 1/f_samp;
     time_vec = 0:t_samp:(cacode_len*20-1)*t_samp;
     
