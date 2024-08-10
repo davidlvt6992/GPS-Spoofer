@@ -28,13 +28,13 @@ classdef frame < handle
             eph.idot = eph.idot/pi;
 
             obj.create_sf1(eph,others_struct);
-            others_struct.TOW = others_struct.TOW + 6;
+%             others_struct.TOW = others_struct.TOW + 6;
             obj.create_sf2(eph,others_struct);
-            others_struct.TOW = others_struct.TOW + 6;
+%             others_struct.TOW = others_struct.TOW + 6;
             obj.create_sf3(eph,others_struct);
-            others_struct.TOW = others_struct.TOW + 6;
+%             others_struct.TOW = others_struct.TOW + 6;
             obj.create_sf4(eph,others_struct);
-            others_struct.TOW = others_struct.TOW + 6;
+%             others_struct.TOW = others_struct.TOW + 6;
             obj.create_sf5(eph,others_struct);
             obj.bit_stream = cat(2,obj.sf1.bit_stream, ...
                 obj.sf2.bit_stream, obj.sf3.bit_stream, ...

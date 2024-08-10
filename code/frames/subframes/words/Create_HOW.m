@@ -9,9 +9,9 @@ function [HOW_raw, HOW_encoded] = Create_HOW(TOW, alert_flag, AS_flag, subframe_
 %   respectively.
     
     %set defualts, comment to disable.
-    TOW = 15000*6;
-    alert_flag = 0;
-    AS_flag = 0;
+%     TOW = 15000*6;
+%     alert_flag = 0;
+%     AS_flag = 0;
     
     %convert TOW from seconds to formatted 17 bits with LSB of 6 seconds
     TOW_LSB = 6; %seconds

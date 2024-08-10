@@ -96,7 +96,7 @@ classdef subframe1 < handle
             % to bits 17-24, signed.
 
             %override given value, comment to disable
-            T_GD = 0;
+%             T_GD = 0;
             
             reserved_bits_1_16 = zeros(1,16); %first 16 bits are reserve
             T_GD_bits = convert2bin(T_GD,2^-31, 8)-'0'; %8 scaled TGD signed bits 
