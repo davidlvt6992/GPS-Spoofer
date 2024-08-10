@@ -22,4 +22,10 @@ rad.json
 TestResults.xml
 #GNSS-output files
 *.24P
+*.24N
+*.24O
 gps_ephemeris.xml
+*.asv
+*.gpx
+*.geojson
+*.kml
