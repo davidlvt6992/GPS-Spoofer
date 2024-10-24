@@ -14,7 +14,7 @@ btsr25 = [];
 
 eph_mat = eph_formatted_([7,3,4,5]);
 %create 3*1500 frames bit-streams
-for i=1:3
+for i=1:1
     fr30 = frame(eph_formatted_{7},others_struct); %sv 30
     fr16 = frame(eph_formatted_{3},others_struct); %sv 16
     fr21 = frame(eph_formatted_{4},others_struct); %sv 21
@@ -27,10 +27,10 @@ for i=1:3
 end
 
 %create dig waveforms using ca code
-dig_wf30 = single(get_waveform(cacode(30,4),btsr30,2e3));
-dig_wf16 = single(get_waveform(cacode(16,4),btsr16,1.5e3));
-dig_wf21 = single(get_waveform(cacode(21,4),btsr21,4e3));
-dig_wf25 = single(get_waveform(cacode(25,4),btsr25,-3e3));
+dig_wf30 = single(get_waveform(cacode(30,4),btsr30,2e3,0));
+dig_wf16 = single(get_waveform(cacode(16,4),btsr16,1.5e3,0));
+dig_wf21 = single(get_waveform(cacode(21,4),btsr21,4e3,0));
+dig_wf25 = single(get_waveform(cacode(25,4),btsr25,-3e3,0));
 
 
 dig_wf_mat = [dig_wf30 ; dig_wf16 ; dig_wf21 ; dig_wf25];
@@ -56,6 +56,7 @@ wf_real = real(combined_wf);
 wf_imag = imag(combined_wf);
 clear combined_wf;
 stacked = [wf_real;wf_imag];
+clear wf_real wf_imag;
 interleaved_wf = stacked(:)';
 clear stacked;
 

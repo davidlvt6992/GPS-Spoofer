@@ -11,12 +11,12 @@ bitstream_mat(3,:) = [bitstream_mat(3,2:end) 0];
 num_bits = 100;
 
 sv_ind = [1];
-num_sv = size(sv_ind,2);
+num_sv = size(sv_ind,2);bit
 ca_rep_len = 1023*4*20;
 
 
 bs_mat = zeros(num_sv,num_bits);
-% f_dop = [2e3 4e3 -5e3 3e3 -3e3];
+% f_dop = [0 4e3 -5e3 3e3 -3e3];
 f_dop = [6.98e3 5.37e3 9.85e3 8.24e3 6.35e3];
 wf_mat = zeros(num_sv,num_bits*ca_rep_len);
 f_samp = 50*20*1023*4;
@@ -26,6 +26,7 @@ pr_ = pr-min(pr);
 c = 299792458;
 shift_arr = round((pr_/c)/t_samp);
 time_vec = 0:t_samp:(num_bits*ca_rep_len-1)*t_samp;
+%%
 %build individual waveforms
 for i=1:num_sv
      bs = bitstream_mat(i,:);
@@ -68,8 +69,8 @@ fclose(fid);
 close
 figure(1)
 cnt =1;
-
-[fid,msg] = fopen("GNSS_files\GNSS_waveforms\waveform_freestyle_4sv_wPR.bin");
+file_path =  sprintf("data\\waveform_creation\\sv%d_waveform.bin",1);
+[fid,msg] = fopen(file_path);
 num_bits_read = 10;
 wf = fread(fid,1023*4*20*2*num_bits_read,'int16')';
 wf_real = wf(1:2:end);

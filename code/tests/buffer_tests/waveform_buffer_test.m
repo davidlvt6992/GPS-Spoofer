@@ -1,6 +1,7 @@
 test_frame; %run script to construct frames object.
 load('data\observables.mat');
-rcvr_tow = RX_time(1,end);
+% rcvr_tow = RX_time(1,end);
+rcvr_tow = 90000;
 
 %some constants:
 f_bit = 50; %bits per second
@@ -19,9 +20,10 @@ btsr25 = [];
 btsr29 = [];
 btsr31 = [];
 
-eph_mat = eph_formatted_([7,3,4,5,6,8]);
+% eph_mat = eph_formatted_([7,3,4,5,6,8]);
+eph_mat = eph_formatted_([7]);
 %create 3*1500 frames bit-streams
-for i=1:3
+for i=1:1
     fr30 = frame(eph_formatted_{7},others_struct); %sv 30
     fr16 = frame(eph_formatted_{3},others_struct); %sv 16
     fr21 = frame(eph_formatted_{4},others_struct); %sv 21
@@ -38,17 +40,21 @@ for i=1:3
     others_struct.TOW = others_struct.TOW+30;
 end
 
-sv_num = [30;16;21;25;29;31];
-sv_bitsreams = [btsr30 ; btsr16 ; btsr21 ; btsr25 ; btsr29 ; btsr31];
+% sv_num = [30;16;21;25;29;31];
+sv_num = [30];
+% sv_bitsreams = [btsr30 ; btsr16 ; btsr21 ; btsr25 ; btsr29 ; btsr31];
+sv_bitsreams = [btsr30(1:100)];
 clear btsr30 btsr16 btsr21 btsr25 btsr29 btsr31;
 
 madrid_lla = [40.41524063127617, -3.6825268152573467 0];
 RX_TOW = rcvr_tow;
 
-f_dop = [2e3;-4e3;6e3;-5e3;1e3;4e3]; %doppler frequencies
-buffer_size = 2*modulated_bit_length;
+% f_dop = [2e3;-4e3;6e3;-5e3;1e3;4e3]; %doppler frequencies
+f_dop = [2e3];
 
-path = "GNSS_files\GNSS_waveforms\waveform_buffer_2bin_6sv.bin";
+buffer_size = 1*modulated_bit_length;
+
+path = "GNSS_files\GNSS_waveforms\waveform_buffer_1sv.bin";
 
 waveform_buffer_2bin(sv_num,sv_bitsreams,madrid_lla,RX_TOW,eph_mat,...
     f_samp,f_dop,buffer_size,path); %modulated combined waveform.
