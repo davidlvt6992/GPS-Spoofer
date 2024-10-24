@@ -1,11 +1,12 @@
 function bitstream2waveformf(bitstream, sv_num, f_dop)
 % bitstream2waveformf: Creating a binary file with analog waveform (with doppler offset) of the size -
 % ca_code*samples_per_chip(4)*20*bitstream_size  
-	% Usage: wf_bitstream = get_waveform(g, frames, f_dop)
+	% Usage: wf_bitstream = bitstream2waveformf(bitstream, sv_num, f_dop)
 	% Input Args: 
     %             bitstream.
 	%             sv_num: the sattelite(space vehicle) number. Used for
-	%             getting the sv ca_code with the function cacode.m .
+	%             getting the sv ca_code with the function cacode.m. f_dop
+    %             is doppler frequency
     
     %% Params
     samples_per_chip = 4;
